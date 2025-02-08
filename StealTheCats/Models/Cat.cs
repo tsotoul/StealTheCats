@@ -10,7 +10,7 @@ namespace StealTheCatsApi.Models
         public required string CatId { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        public required string Image { get; set; }
+        public byte[] Image { get; set; }
         public DateTime Created { get; private set; }
         [NotMapped]
         public List<string> Temperaments { get; set; }

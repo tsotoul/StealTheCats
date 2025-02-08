@@ -34,5 +34,18 @@ namespace StealTheCatsApi.Repositories
                 throw new Exception("Something went wrong when trying to fetch the cats from the Api: " + e.Message);
             }
         }
+
+        public async Task<byte[]> DownloadImageAsync(string imageUrl)
+        {
+            try
+            {
+                var imageBytes = await _httpClient.GetByteArrayAsync(imageUrl);
+                return imageBytes;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error downloading the image", ex);
+            }
+        }
     }
 }

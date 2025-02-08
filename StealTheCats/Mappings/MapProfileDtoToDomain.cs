@@ -10,7 +10,6 @@ namespace StealTheCatsApi.Mappings
         {
             CreateMap<ApiCatDto, Cat>()
                 .ForMember(dest => dest.CatId, src => src.MapFrom(m => m.Id))
-                .ForMember(dest => dest.Image, src => src.MapFrom(m => m.Url))
                 .ForMember(dest => dest.Temperaments, src => src.MapFrom(m => ExtractTemperaments(m.Breeds)))
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
         }

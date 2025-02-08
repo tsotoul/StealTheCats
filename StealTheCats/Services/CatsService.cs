@@ -24,10 +24,16 @@ namespace StealTheCatsApi.Services
             var numberOfCatsSaved = 0;
             var catsDtos = await _catsApiRepository.GetCatsAsync(numberOfCatsToSave);
 
+            foreach (var catDto in catsDtos)
+            {
+                catDto.Image = await _catsApiRepository.DownloadImageAsync(catDto.Url);
+            }
+
             List<Cat> catsFromTheApi = _mapper.Map<List<Cat>>(catsDtos);
 
             foreach (var cat in catsFromTheApi)
             {
+                //cat.Image = await _catsApiRepository.DownloadImageAsync(catsDtos.FirstOrDefault(c => c.Id == cat.CatId).Url);
                 if (await _databaseRepository.SaveCatAsync(cat)) numberOfCatsSaved++;
             }
 

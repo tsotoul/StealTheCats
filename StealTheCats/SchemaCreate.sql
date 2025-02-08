@@ -16,7 +16,7 @@ CREATE TABLE [Cats] (
     [CatId] nvarchar(max) NOT NULL,
     [Width] int NOT NULL,
     [Height] int NOT NULL,
-    [Image] nvarchar(max) NOT NULL,
+    [Image] varbinary(max) NOT NULL,
     [Created] datetime2 NOT NULL,
     CONSTRAINT [PK_Cats] PRIMARY KEY ([Id])
 );
@@ -47,7 +47,7 @@ CREATE INDEX [IX_CatTags_TagId] ON [CatTags] ([TagId]);
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20250208134329_initialCreate', N'8.0.10');
+VALUES (N'20250208194150_InitialCreate', N'8.0.10');
 GO
 
 COMMIT;

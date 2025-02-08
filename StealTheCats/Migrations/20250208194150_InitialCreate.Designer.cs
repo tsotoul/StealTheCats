@@ -5,16 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using StealTheCats;
 using StealTheCatsApi;
 
 #nullable disable
 
-namespace StealTheCats.Migrations
+namespace StealTheCatsApi.Migrations
 {
     [DbContext(typeof(CatsDbContext))]
-    [Migration("20250208134329_initialCreate")]
-    partial class initialCreate
+    [Migration("20250208194150_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,7 +25,7 @@ namespace StealTheCats.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("StealTheCats.Models.Cat", b =>
+            modelBuilder.Entity("StealTheCatsApi.Models.Cat", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,13 +43,9 @@ namespace StealTheCats.Migrations
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
-                    b.Property<string>("Image")
+                    b.Property<byte[]>("Image")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Temperaments")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("Width")
                         .HasColumnType("int");
@@ -60,7 +55,7 @@ namespace StealTheCats.Migrations
                     b.ToTable("Cats");
                 });
 
-            modelBuilder.Entity("StealTheCats.Models.CatTag", b =>
+            modelBuilder.Entity("StealTheCatsApi.Models.CatTag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,7 +78,7 @@ namespace StealTheCats.Migrations
                     b.ToTable("CatTags");
                 });
 
-            modelBuilder.Entity("StealTheCats.Models.Tag", b =>
+            modelBuilder.Entity("StealTheCatsApi.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -103,15 +98,15 @@ namespace StealTheCats.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("StealTheCats.Models.CatTag", b =>
+            modelBuilder.Entity("StealTheCatsApi.Models.CatTag", b =>
                 {
-                    b.HasOne("StealTheCats.Models.Cat", "Cat")
+                    b.HasOne("StealTheCatsApi.Models.Cat", "Cat")
                         .WithMany("CatTags")
                         .HasForeignKey("CatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StealTheCats.Models.Tag", "Tag")
+                    b.HasOne("StealTheCatsApi.Models.Tag", "Tag")
                         .WithMany("CatTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -122,12 +117,12 @@ namespace StealTheCats.Migrations
                     b.Navigation("Tag");
                 });
 
-            modelBuilder.Entity("StealTheCats.Models.Cat", b =>
+            modelBuilder.Entity("StealTheCatsApi.Models.Cat", b =>
                 {
                     b.Navigation("CatTags");
                 });
 
-            modelBuilder.Entity("StealTheCats.Models.Tag", b =>
+            modelBuilder.Entity("StealTheCatsApi.Models.Tag", b =>
                 {
                     b.Navigation("CatTags");
                 });
