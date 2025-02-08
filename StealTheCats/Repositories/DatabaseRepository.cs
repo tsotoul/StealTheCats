@@ -49,12 +49,12 @@ namespace StealTheCatsApi.Repositories
             return true;
         }
 
-        public async Task<Cat?> GetCatByIdAsync(string catId)
+        public async Task<Cat> GetCatByIdAsync(int id)
         {
-            return await _context.Cats.FirstOrDefaultAsync(c => c.CatId == catId);
+            return await _context.Cats.FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<IEnumerable<Cat?>> GetCatsAsync(int page, int pageSize)
+        public async Task<IEnumerable<Cat>> GetCatsAsync(int page, int pageSize)
         {
             return await _context.Cats
                 .Skip((page - 1) * pageSize)
@@ -62,7 +62,7 @@ namespace StealTheCatsApi.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Cat?>> GetCatsByTagAsync(string tag, int page, int pageSize)
+        public async Task<IEnumerable<Cat>> GetCatsByTagAsync(string tag, int page, int pageSize)
         {
             return await _context.Cats
                 .Where(c => c.CatTags.Any(ct => ct.Tag.Name == tag))

@@ -30,14 +30,14 @@ namespace StealTheCatsApi.Controllers
         [SwaggerResponse(statusCode: (int)HttpStatusCode.OK, Description = "Gets cat by Id.")]
         [SwaggerResponse(statusCode: (int)HttpStatusCode.NotFound, Description = "Cat not found in the database.")]
         [SwaggerResponse(statusCode: (int)HttpStatusCode.BadRequest, Description = "Invalid client input data")]
-        public async Task<IActionResult> GetCatByIdAsync([FromQuery] string catId)
+        public async Task<IActionResult> GetCatByIdAsync([FromRoute] int id)
         {
-            if (id < 1)
+            if (id < 0)
             {
-                return BadRequest("ID must be greater than 0.");
+                return BadRequest("CatId much be provided.");
             }
 
-            var cat = await _catsService.GetCatByIdAsync(catId);
+            var cat = await _catsService.GetCatByIdAsync(id);
 
             return Ok(cat);
         }

@@ -24,7 +24,7 @@ namespace StealTheCatsApi.Services
             var numberOfCatsSaved = 0;
             var catsDtos = await _catsApiRepository.GetCatsAsync(numberOfCatsToSave);
 
-            List<Cat?>? catsFromTheApi = _mapper.Map<List<Cat>>(catsDtos);
+            List<Cat> catsFromTheApi = _mapper.Map<List<Cat>>(catsDtos);
 
             foreach (var cat in catsFromTheApi)
             {
@@ -37,9 +37,11 @@ namespace StealTheCatsApi.Services
             }
         }
 
-        public async Task<DatabaseCatDto> GetCatByIdAsync(string catId)
+        public async Task<DatabaseCatDto> GetCatByIdAsync(int id)
         {
-            var catFromTheDatabase = await _databaseRepository.GetCatByIdAsync(string catId);
+            var catFromTheDatabase = await _databaseRepository.GetCatByIdAsync(id);
+
+            return _mapper.Map<DatabaseCatDto>(catFromTheDatabase);
         }
 
         public async Task<IEnumerable<DatabaseCatDto>> GetCatsAsync(int page, int pageSize)
