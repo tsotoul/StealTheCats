@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace StealTheCats.Models
+namespace StealTheCatsApi.Models
 {
     public class Cat
     {

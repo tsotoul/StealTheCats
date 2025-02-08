@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace StealTheCats.Models
+namespace StealTheCatsApi.Models
 {
     public class Tag
     {

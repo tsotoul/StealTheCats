@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StealTheCats.Services.Interfaces;
+using StealTheCatsApi.Services.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 
-namespace StealTheCats.Controllers
+namespace StealTheCatsApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -25,6 +25,23 @@ namespace StealTheCats.Controllers
             return new CreatedResult("", true);
         }
 
+        [HttpGet("{id}")]
+        [SwaggerOperation(Summary = "Gets a Cat from the database by Id", Description = "Fetches a cat based on its unique Id")]
+        [SwaggerResponse(statusCode: (int)HttpStatusCode.OK, Description = "Gets cat by Id.")]
+        [SwaggerResponse(statusCode: (int)HttpStatusCode.NotFound, Description = "Cat not found in the database.")]
+        [SwaggerResponse(statusCode: (int)HttpStatusCode.BadRequest, Description = "Invalid client input data")]
+        public async Task<IActionResult> GetCatByIdAsync([FromQuery] string catId)
+        {
+            if (id < 1)
+            {
+                return BadRequest("ID must be greater than 0.");
+            }
+
+            var cat = await _catsService.GetCatByIdAsync(catId);
+
+            return Ok(cat);
+        }
+
         [HttpGet]
         [SwaggerOperation(Summary = "Gets Cats from the database", Description = "Gets paginated cats from the database, optionally filtered by tag")]
         [SwaggerResponse(statusCode: (int)HttpStatusCode.OK, Description = "Gets paginated cats from database successfully.")]
@@ -33,7 +50,7 @@ namespace StealTheCats.Controllers
         {
             if (page < 1 || pageSize < 1)
             {
-                return BadRequest("Page and pageSize must be greater than 0. If a tag is provided, it cannot be an empty string.");
+                return BadRequest("Page and pageSize must be greater than 0.");
             }
 
             var cats = string.IsNullOrEmpty(tag)

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
-using StealTheCats.Configuration;
-using StealTheCats.Dtos;
-using StealTheCats.Repositories.Interfaces;
+using StealTheCatsApi.Configuration;
+using StealTheCatsApi.Dtos;
+using StealTheCatsApi.Repositories.Interfaces;
 
-namespace StealTheCats.Repositories
+namespace StealTheCatsApi.Repositories
 {
     public class CatsApiRepository : ICatsApiRepository
     {

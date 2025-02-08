@@ -1,4 +1,4 @@
-﻿namespace StealTheCats.Dtos
+﻿namespace StealTheCatsApi.Dtos
 {
     public class BreedDto
     {

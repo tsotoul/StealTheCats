@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using StealTheCats.Dtos;
-using StealTheCats.Models;
+using StealTheCatsApi.Dtos;
+using StealTheCatsApi.Models;
 
-namespace StealTheCats.Mappings
+namespace StealTheCatsApi.Mappings
 {
     public class MapProfileDtoToDomain : Profile
     {

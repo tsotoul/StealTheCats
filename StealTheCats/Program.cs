@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using StealTheCats;
-using StealTheCats.Configuration;
-using StealTheCats.Mappings;
-using StealTheCats.Repositories;
-using StealTheCats.Repositories.Interfaces;
-using StealTheCats.Services;
-using StealTheCats.Services.Interfaces;
+using StealTheCatsApi;
+using StealTheCatsApi.Configuration;
+using StealTheCatsApi.Mappings;
+using StealTheCatsApi.Repositories;
+using StealTheCatsApi.Repositories.Interfaces;
+using StealTheCatsApi.Services;
+using StealTheCatsApi.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

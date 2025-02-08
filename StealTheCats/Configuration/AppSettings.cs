@@ -1,4 +1,4 @@
-﻿namespace StealTheCats.Configuration
+﻿namespace StealTheCatsApi.Configuration
 {
     public class AppSettings
     {

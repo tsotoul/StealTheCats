@@ -1,6 +1,6 @@
-﻿using StealTheCats.Dtos;
+﻿using StealTheCatsApi.Dtos;
 
-namespace StealTheCats.Repositories.Interfaces
+namespace StealTheCatsApi.Repositories.Interfaces
 {
     public interface ICatsApiRepository
     {

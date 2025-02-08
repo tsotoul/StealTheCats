@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StealTheCats.Models;
+using StealTheCatsApi.Models;
 
-namespace StealTheCats
+namespace StealTheCatsApi
 {
     public class CatsDbContext : DbContext
     {
-        public DbSet<Cat> Cats { get; set; }
+        public DbSet<Cat?> Cats { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<CatTag> CatTags { get; set; }
 

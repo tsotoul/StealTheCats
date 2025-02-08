@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using StealTheCats.Dtos;
-using StealTheCats.Models;
-using StealTheCats.Repositories.Interfaces;
-using StealTheCats.Services.Interfaces;
+using StealTheCatsApi.Dtos;
+using StealTheCatsApi.Models;
+using StealTheCatsApi.Repositories.Interfaces;
+using StealTheCatsApi.Services.Interfaces;
 
-namespace StealTheCats.Services
+namespace StealTheCatsApi.Services
 {
     public class CatsService : ICatsService
     {
@@ -24,7 +24,7 @@ namespace StealTheCats.Services
             var numberOfCatsSaved = 0;
             var catsDtos = await _catsApiRepository.GetCatsAsync(numberOfCatsToSave);
 
-            var catsFromTheApi = _mapper.Map<List<Cat>>(catsDtos);
+            List<Cat?>? catsFromTheApi = _mapper.Map<List<Cat>>(catsDtos);
 
             foreach (var cat in catsFromTheApi)
             {
@@ -35,6 +35,11 @@ namespace StealTheCats.Services
             {
                 await FetchCatsAsync(numberOfCatsToSave - numberOfCatsSaved);
             }
+        }
+
+        public async Task<DatabaseCatDto> GetCatByIdAsync(string catId)
+        {
+            var catFromTheDatabase = await _databaseRepository.GetCatByIdAsync(string catId);
         }
 
         public async Task<IEnumerable<DatabaseCatDto>> GetCatsAsync(int page, int pageSize)

@@ -1,4 +1,4 @@
-﻿namespace StealTheCats.Models
+﻿namespace StealTheCatsApi.Models
 {
     public class Image
     {
