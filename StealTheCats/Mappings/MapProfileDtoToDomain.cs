@@ -1,0 +1,24 @@
+﻿using AutoMapper;
+using StealTheCats.Dtos;
+using StealTheCats.Models;
+
+namespace StealTheCats.Mappings
+{
+    public class MapProfileDtoToDomain : Profile
+    {
+        public MapProfileDtoToDomain()
+        {
+            CreateMap<CatDto, Cat>()
+                .ForMember(dest => dest.CatId, src => src.MapFrom(m => m.Id))
+                .ForMember(dest => dest.Image, src => src.MapFrom(m => m.Url))
+                .ForMember(dest => dest.Temperaments, src => src.MapFrom(m => ExtractTemperaments(m.Breeds)))
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+        }
+
+        private List<string> ExtractTemperaments(IEnumerable<BreedDto> breeds)
+        {
+            return breeds
+                .SelectMany(breed => breed.Temperament.Split(',').Select(t => t.Trim())).ToList();
+        }
+    }
+}
