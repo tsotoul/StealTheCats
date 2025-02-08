@@ -26,33 +26,20 @@ namespace StealTheCats.Controllers
         }
 
         [HttpGet]
-        [SwaggerOperation(Summary = "Gets Cats from the database", Description = "Gets 10 cats from the database")]
+        [SwaggerOperation(Summary = "Gets Cats from the database", Description = "Gets paginated cats from the database, optionally filtered by tag")]
         [SwaggerResponse(statusCode: (int)HttpStatusCode.OK, Description = "Gets paginated cats from database successfully.")]
         [SwaggerResponse(statusCode: (int)HttpStatusCode.BadRequest, Description = "Invalid client input data")]
-        public async Task<IActionResult> GetCatsAsync([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> GetCatsAsync([FromQuery] string tag = "", [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            if (page < 1 || pageSize < 1)
+            if (page < 1 || pageSize < 1 || (string.IsNullOrEmpty(tag) && tag != ""))
             {
-                return BadRequest("Page and pageSize must be greater than 0.");
+                return BadRequest("Page and pageSize must be greater than 0. If a tag is provided, it cannot be an empty string.");
             }
 
-            var cats = await _catsService.GetCatsAsync(page, pageSize);
+            var cats = string.IsNullOrEmpty(tag)
+                ? await _catsService.GetCatsAsync(page, pageSize)
+                : await _catsService.GetCatsByTagAsync(tag, page, pageSize);
 
-            return Ok(cats);
-        }
-
-        [HttpGet("byTag")]
-        [SwaggerOperation(Summary = "Gets Cats from the database by specific tag", Description = "Gets 10 cats from the database by specific tag")]
-        [SwaggerResponse(statusCode: (int)HttpStatusCode.OK, Description = "Gets paginated cats from database by specific tag successfully.")]
-        [SwaggerResponse(statusCode: (int)HttpStatusCode.BadRequest, Description = "Invalid client input data")]
-        public async Task<IActionResult> GetCatsByTagAsync([FromQuery] string tag, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
-        {
-            if (page < 1 || pageSize < 1 || tag == "")
-            {
-                return BadRequest("There is a problem with the parameters. Please check that page and pageSize are > 0 and tag is not empty");
-            }
-
-            var cats = await _catsService.GetCatsByTagAsync(tag, page, pageSize);
             return Ok(cats);
         }
     }
