@@ -1,6 +1,6 @@
 ﻿namespace StealTheCats.Dtos
 {
-    public class CatDto
+    public class ApiCatDto
     {
         public string Id { get; set; }
         public int Width { get; set; }

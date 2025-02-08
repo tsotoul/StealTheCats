@@ -18,7 +18,6 @@ CREATE TABLE [Cats] (
     [Height] int NOT NULL,
     [Image] nvarchar(max) NOT NULL,
     [Created] datetime2 NOT NULL,
-    [Temperaments] nvarchar(max) NOT NULL,
     CONSTRAINT [PK_Cats] PRIMARY KEY ([Id])
 );
 GO

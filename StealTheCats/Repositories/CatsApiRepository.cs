@@ -16,18 +16,18 @@ namespace StealTheCats.Repositories
             _appSettings = options.Value;
         }
 
-        public async Task<IEnumerable<CatDto>> GetCatsAsync()
+        public async Task<IEnumerable<ApiCatDto>> GetCatsAsync(int numberOfCatsToFetch)
         {
             try
             {
-                string url = $"{_appSettings.CatsApiUrl}?has_breeds=true&limit={_appSettings.Limit}";
+                string url = $"{_appSettings.CatsApiUrl}?has_breeds=true&limit={numberOfCatsToFetch}";
                 using var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add(_appSettings.ApiKey, _appSettings.ApiSecret);
 
                 using var response = await _httpClient.SendAsync(request);
                 response.EnsureSuccessStatusCode();
 
-                return await response.Content.ReadFromJsonAsync<IEnumerable<CatDto>>() ?? throw new InvalidOperationException();
+                return await response.Content.ReadFromJsonAsync<IEnumerable<ApiCatDto>>() ?? throw new InvalidOperationException();
             }
             catch (Exception e)
             {

@@ -1,4 +1,5 @@
-﻿using StealTheCats.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using StealTheCats.Models;
 using StealTheCats.Repositories.Interfaces;
 
 namespace StealTheCats.Repositories
@@ -12,8 +13,13 @@ namespace StealTheCats.Repositories
             _context = context;
         }
 
-        public async Task SaveCatAsync(Cat cat)
+        public async Task<bool> SaveCatAsync(Cat cat)
         {
+            if (await _context.Cats.AnyAsync(c => c.CatId == cat.CatId))
+            {
+                return false;
+            }
+
             var tags = cat.Temperaments.Select(name => new Tag { Name = name }).ToList();
 
             foreach (var tag in tags)
@@ -23,6 +29,7 @@ namespace StealTheCats.Repositories
                     await _context.Tags.AddAsync(tag);
                 }
             }
+
 
             await _context.Cats.AddAsync(cat);
             await _context.SaveChangesAsync();
@@ -38,6 +45,25 @@ namespace StealTheCats.Repositories
             }
 
             await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<IEnumerable<Cat>> GetCatsAsync(int page, int pageSize)
+        {
+            return await _context.Cats
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Cat>> GetCatsByTagAsync(string tag, int page, int pageSize)
+        {
+            return await _context.Cats
+                .Where(c => c.CatTags.Any(ct => ct.Tag.Name == tag))
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
         }
     }
 }

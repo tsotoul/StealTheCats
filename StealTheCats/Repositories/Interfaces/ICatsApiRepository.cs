@@ -4,6 +4,6 @@ namespace StealTheCats.Repositories.Interfaces
 {
     public interface ICatsApiRepository
     {
-        Task<IEnumerable<CatDto>> GetCatsAsync();
+        Task<IEnumerable<ApiCatDto>> GetCatsAsync(int numberOfCatsToFetch);
     }
 }

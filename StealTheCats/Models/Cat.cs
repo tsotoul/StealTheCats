@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StealTheCats.Models
 {
@@ -11,6 +12,7 @@ namespace StealTheCats.Models
         public int Height { get; set; }
         public required string Image { get; set; }
         public DateTime Created { get; private set; }
+        [NotMapped]
         public List<string> Temperaments { get; set; }
         public List<CatTag> CatTags { get; set; }
 

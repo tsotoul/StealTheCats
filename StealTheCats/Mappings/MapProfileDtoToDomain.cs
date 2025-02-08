@@ -8,7 +8,7 @@ namespace StealTheCats.Mappings
     {
         public MapProfileDtoToDomain()
         {
-            CreateMap<CatDto, Cat>()
+            CreateMap<ApiCatDto, Cat>()
                 .ForMember(dest => dest.CatId, src => src.MapFrom(m => m.Id))
                 .ForMember(dest => dest.Image, src => src.MapFrom(m => m.Url))
                 .ForMember(dest => dest.Temperaments, src => src.MapFrom(m => ExtractTemperaments(m.Breeds)))
@@ -18,7 +18,7 @@ namespace StealTheCats.Mappings
         private List<string> ExtractTemperaments(IEnumerable<BreedDto> breeds)
         {
             return breeds
-                .SelectMany(breed => breed.Temperament.Split(',').Select(t => t.Trim())).ToList();
+                .SelectMany(breed => breed.Temperament.Split(',').Select(t => t.Trim()).Select(t => t.ToUpper())).ToList();
         }
     }
 }

@@ -34,6 +34,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.DocumentTitle = "Steal The Cats API";
+        c.RoutePrefix = "swagger";
     });
 }
 
