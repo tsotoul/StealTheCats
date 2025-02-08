@@ -33,7 +33,6 @@ namespace StealTheCatsApi.Services
 
             foreach (var cat in catsFromTheApi)
             {
-                //cat.Image = await _catsApiRepository.DownloadImageAsync(catsDtos.FirstOrDefault(c => c.Id == cat.CatId).Url);
                 if (await _databaseRepository.SaveCatAsync(cat)) numberOfCatsSaved++;
             }
 
