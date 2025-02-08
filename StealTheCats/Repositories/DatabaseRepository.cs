@@ -13,7 +13,7 @@ namespace StealTheCatsApi.Repositories
             _context = context;
         }
 
-        public async Task<bool> SaveCatAsync(Cat? cat)
+        public async Task<bool> SaveCatAsync(Cat cat)
         {
             if (await _context.Cats.AnyAsync(c => c.CatId == cat.CatId))
             {

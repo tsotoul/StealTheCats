@@ -2,11 +2,11 @@
 {
     public class ApiCatDto
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = String.Empty;
         public int Width { get; set; }
         public int Height { get; set; }
-        public string Url { get; set; }
-        public byte[] Image { get; set; }
-        public IEnumerable<BreedDto> Breeds { get; set; }
+        public string Url { get; set; } = String.Empty;
+        public byte[] Image { get; set; } = Array.Empty<byte>();
+        public IEnumerable<BreedDto> Breeds { get; set; } = Enumerable.Empty<BreedDto>();
     }
 }

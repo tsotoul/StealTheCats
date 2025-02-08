@@ -39,6 +39,11 @@ namespace StealTheCatsApi.Controllers
 
             var cat = await _catsService.GetCatByIdAsync(id);
 
+            if (cat == null)
+            {
+                return NotFound("Cat not found in the database.");
+            }
+
             return Ok(cat);
         }
 
