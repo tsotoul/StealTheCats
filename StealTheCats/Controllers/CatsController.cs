@@ -21,9 +21,9 @@ namespace StealTheCats.Controllers
         [SwaggerResponse(statusCode: (int)HttpStatusCode.Created, Description = "Fetched and saved 25 cats successfully.")]
         [SwaggerResponse(statusCode: (int)HttpStatusCode.BadRequest, Description = "Invalid client input data.")]
         [SwaggerResponse(statusCode: (int)HttpStatusCode.Forbidden, Description = "User not permitted to perform such operation")]
-        public async Task<IActionResult> FetchCats()
+        public async Task<IActionResult> FetchCatsAsync()
         {
-            await _catsService.FetchCats();
+            await _catsService.FetchCatsAsync();
             return new CreatedResult("", true);
         }
 

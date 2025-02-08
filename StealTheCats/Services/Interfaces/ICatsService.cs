@@ -2,6 +2,6 @@
 {
     public interface ICatsService
     {
-        Task FetchCats();
+        Task FetchCatsAsync();
     }
 }

@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using StealTheCats;
 using StealTheCats.Configuration;
 using StealTheCats.Mappings;
 using StealTheCats.Repositories;
@@ -17,8 +19,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 builder.Services.AddTransient<ICatsService, CatsService>();
 builder.Services.AddTransient<ICatsApiRepository, CatsApiRepository>();
+builder.Services.AddTransient<IDatabaseRepository, DatabaseRepository>();
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("Cat_Api_Settings"));
 builder.Services.AddAutoMapper(typeof(MapProfileDtoToDomain));
+builder.Services.AddDbContext<CatsDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CatsDatabaseConnection")));
 
 var app = builder.Build();
 
