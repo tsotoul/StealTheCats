@@ -29,9 +29,9 @@ namespace StealTheCats.Controllers
         [SwaggerOperation(Summary = "Gets Cats from the database", Description = "Gets paginated cats from the database, optionally filtered by tag")]
         [SwaggerResponse(statusCode: (int)HttpStatusCode.OK, Description = "Gets paginated cats from database successfully.")]
         [SwaggerResponse(statusCode: (int)HttpStatusCode.BadRequest, Description = "Invalid client input data")]
-        public async Task<IActionResult> GetCatsAsync([FromQuery] string tag = "", [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> GetCatsAsync([FromQuery] string? tag, [FromQuery] int page, [FromQuery] int pageSize)
         {
-            if (page < 1 || pageSize < 1 || (string.IsNullOrEmpty(tag) && tag != ""))
+            if (page < 1 || pageSize < 1)
             {
                 return BadRequest("Page and pageSize must be greater than 0. If a tag is provided, it cannot be an empty string.");
             }
