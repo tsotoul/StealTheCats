@@ -1,6 +1,6 @@
 # Steal The Cats Api
 
-An ASP.NET Web APO for fetching cats from the free https://api.thecatapi.com/, built in Visual Studio with Microsoft SQL Server as Database Storage and Entity Framework Core as ORM
+An ASP.NET Web API for fetching cats from the free https://api.thecatapi.com/, built in Visual Studio with Microsoft SQL Server as Database Storage and Entity Framework Core as ORM
 
 ## Table of Contents
 
@@ -45,3 +45,26 @@ Unit tests are included for the Controller, Service and Repositories
 To use the API, you need to have the API secret. <br>
 Go to https://api.thecatapi.com/ and follow the instructions to get an api secret in your personal email.
 Once you have it, locate the **appSettings.json** in the rool folder of the project, and replace *"YOUR_API_SECRET_GOES_HERE"* with your api secret.
+
+## Setup database
+To setup the database, you will need to have SQL Server Management Studio or equivalent, or use any interface of your Microsoft SQL Server<br>
+Once you open it, create an empty database called Cats and copy the Server name in the Data Source of your **appSettings.json** replacing *"YOUR_SERVER_NAME_GOES_HERE"*.<br>
+Next, follow the steps below<br>
+1: Locate the **SchemaCreate.sql** file in the root folder of the project and copy everything (Ctrl+A on windows)
+2: Open the Query to run an SQL script targetting Cats database
+3: Paste the SQL commands you have copied and Run the query
+4: You should be able to see the tables created in your local database like this:<br>
+![image](https://github.com/user-attachments/assets/6fcf8135-576f-4aa3-8277-ebbb83afaab2)
+
+## Usage
+Once everything is set up, Run the application locally from Visual Studio (or other IDE) and you will automatically be prompted with the Swagger endpoint where you can test and run your application.<br>
+![image](https://github.com/user-attachments/assets/ef0587e2-4442-44a2-a352-7e7c17f03c54)
+
+## Potential Improvements
+The application can be improved in the following areas:
+- Create integration tests to test the connections with the Cats Api
+- Set Identities in the database to start from the last existing Id as now, if you have Ids = [1, 2, 3, 4, 5, 6] and you remove records with Ids 5 and 6, the next fetch will start at Id = 7
+- More unit test cases
+- Handle failures better for Interal Server Error of the Cats Api
+- Perform more validations on the database properties with NAVCHAR(255) for text
+- Add database Indexes
