@@ -31,7 +31,7 @@ namespace StealTheCatsApi.UnitTests
 
             _httpClientFactory = Substitute.For<IHttpClientFactory>();
             _httpClientFactory.CreateClient().Returns(_httpClient);
-            var _options = Options.Create(new AppSettings()
+            _options = Options.Create(new AppSettings()
             {
                 CatsApiUrl = "https://api.thecatapi.com/v1/images/search",
                 ApiKey = "testKey",
