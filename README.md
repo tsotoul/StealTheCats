@@ -49,11 +49,20 @@ Once you have it, locate the **appSettings.json** in the rool folder of the proj
 ## Setup database
 To setup the database, you will need to have SQL Server Management Studio or equivalent, or use any interface of your Microsoft SQL Server<br>
 Once you open it, create an empty database called Cats and copy the Server name in the Data Source of your **appSettings.json** replacing *"YOUR_SERVER_NAME_GOES_HERE"*.<br>
-Next, follow the steps below<br>
-1: Locate the **SchemaCreate.sql** file in the root folder of the project and copy everything (Ctrl+A on windows)
-2: Open the Query to run an SQL script targetting Cats database
-3: Paste the SQL commands you have copied and Run the query
-4: You should be able to see the tables created in your local database like this:<br>
+Next, follow 1 of the options below:<br>
+
+### Option 1
+1: Open Visual Studio and load the project.<br>
+2: Go to Tools -> Nuget Package Manager -> Package Manager Console. This will open the Package Manager console with a prompt to write your command.<br>
+3: Run the following command: **Update-database** (you need Microsoft.EntityFrameworkCore.Tools for this).
+
+### Option 2
+1: Locate the **SchemaCreate.sql** file in the root folder of the project and copy everything (Ctrl+A on windows)<br>
+2: Open the Query to run an SQL script targetting Cats database<br>
+3: Paste the SQL commands you have copied and Run the query<br>
+
+
+In both options, you should be able to see the tables created in your local database like this:<br>
 ![image](https://github.com/user-attachments/assets/6fcf8135-576f-4aa3-8277-ebbb83afaab2)
 
 ## Usage
