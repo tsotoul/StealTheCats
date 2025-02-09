@@ -29,9 +29,9 @@ namespace StealTheCatsApi.Repositories
 
                 return await response.Content.ReadFromJsonAsync<IEnumerable<ApiCatDto>>() ?? throw new InvalidOperationException();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception("Something went wrong when trying to fetch the cats from the Api: " + e.Message);
+                throw new Exception("Something went wrong when trying to fetch the cats from the Api: " + ex.Message);
             }
         }
 
