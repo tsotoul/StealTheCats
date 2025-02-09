@@ -42,7 +42,7 @@ Unit tests are included for the Controller, Service and Repositories
 - [Shouldly](https://www.nuget.org/packages/shouldly/)
 
 ## Setup API
-To use the API, you need to have the API secret. <br>
+To use the API, you need to have the Cats API secret. <br>
 Go to https://api.thecatapi.com/ and follow the instructions to get an api secret in your personal email.
 Once you have it, locate the **appSettings.json** in the rool folder of the project, and replace *"YOUR_API_SECRET_GOES_HERE"* with your api secret.
 
@@ -64,6 +64,31 @@ Next, follow 1 of the options below:<br>
 
 In both options, you should be able to see the tables created in your local database like this:<br>
 ![image](https://github.com/user-attachments/assets/6fcf8135-576f-4aa3-8277-ebbb83afaab2)
+
+<p>The database consist of the following tables and columns:<p>
+  
+**Cats**: Table to store the cats with the following columns:<br>
+• *Id*: An auto incremental unique integer that identifies a cat within your
+database<br>
+• *CatId*: Represents the id of the image returned from CaaS API<br>
+• *Width*: Integer of the width of the image returned from CaaS API<br>
+• *Height*: Integer of the height of the image returned from CaaS API<br>
+• *Image*: Image data in VarBinary formate (byte[])<br>
+• *Created*: Timestamp of creation of database record <br>
+
+**Tags**: Table to store unique tags (in capitals) with the following columns:<br>
+• *Id*: An auto incremental unique integer that identifies a tag<br>
+• *Name*: The name of the tag<br>
+• *Created*: Timestamp of creation of database record <br>
+
+**CatTags**: Table to store the relationship between the cats and the tags with the following columns:<br>
+• *Id*: An auto incremental unique integer that identifies a CatTag<br>
+• *CatId*: The Cat.Id<br>
+• *TagId*: The Tag.Id<br>
+
+**MigrationHistory**: Table to store the migrations ran in the database:<br>
+
+![image](https://github.com/user-attachments/assets/54c45991-abfa-4f7d-aa16-4340f5fe9661)
 
 ## Usage
 Once everything is set up, Run the application locally from Visual Studio (or other IDE) and you will automatically be prompted with the Swagger endpoint where you can test and run your application.<br>
